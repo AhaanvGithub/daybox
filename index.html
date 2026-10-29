@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Daybox walks you through your skincare routine, step by step."
+    />
+    <title>Daybox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="./assets/index-D8AU9sKh.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BNMmFq_R.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <div class="brand">
+          <h1 class="wordmark" aria-label="Daybox">
+            <span aria-hidden="true">day<span class="slash">/</span>box</span>
+          </h1>
+          <p id="today"></p>
+        </div>
+        <div class="tools">
+          <button
+            class="btn"
+            id="a11yBtn"
+            aria-expanded="false"
+            aria-controls="a11y"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="4.5" r="1.8" />
+              <path
+                d="M4.5 8.5l7.5 1.5 7.5-1.5M12 10v5M12 15l-3.5 6M12 15l3.5 6"
+              />
+            </svg>
+            Accessibility
+          </button>
+          <div
+            class="a11y"
+            id="a11y"
+            role="dialog"
+            aria-label="Accessibility settings"
+            hidden
+          >
+            <h2>Make it comfortable</h2>
+            <div class="opt">
+              <span class="lbl" id="l-size">Text size</span>
+              <div
+                class="pills"
+                role="group"
+                aria-labelledby="l-size"
+                data-pref="size"
+              >
+                <button type="button" data-v="1">Normal</button
+                ><button type="button" data-v="2">Large</button
+                ><button type="button" data-v="3">Extra large</button>
+              </div>
+            </div>
+            <div class="opt">
+              <span class="lbl" id="l-look">Appearance</span>
+              <div
+                class="pills"
+                role="group"
+                aria-labelledby="l-look"
+                data-pref="look"
+              >
+                <button type="button" data-v="charcoal">Charcoal</button
+                ><button type="button" data-v="light">Light</button>
+              </div>
+            </div>
+            <div class="opt">
+              <span class="lbl" id="l-motion">Animation</span>
+              <div
+                class="pills"
+                role="group"
+                aria-labelledby="l-motion"
+                data-pref="motion"
+              >
+                <button type="button" data-v="full">On</button
+                ><button type="button" data-v="reduce">Reduced</button>
+              </div>
+            </div>
+            <div class="opt">
+              <span class="lbl" id="l-sound">Timer chime</span>
+              <div
+                class="pills"
+                role="group"
+                aria-labelledby="l-sound"
+                data-pref="sound"
+              >
+                <button type="button" data-v="on">On</button
+                ><button type="button" data-v="off">Off</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section
+          class="quiz-invite"
+          id="quizInvite"
+          aria-labelledby="quizInviteTitle"
+          hidden
+        >
+          <h2 id="quizInviteTitle">Not sure about your skin?</h2>
+          <p class="meta">
+            Answer <span id="quizCount"></span> quick questions and Daybox picks
+            routines that fit you. You don’t need to know your skin type.
+          </p>
+          <div class="card-actions">
+            <button type="button" class="btn primary" data-quiz="open">
+              Take the skin quiz
+            </button>
+            <button type="button" class="btn" data-quiz="dismiss">
+              Not now
+            </button>
+          </div>
+        </section>
+        <section class="hero panel" aria-labelledby="routineTitle">
+          <div class="switch" role="group" aria-label="Which routine to show">
+            <button type="button" data-part="morning">Morning</button>
+            <button type="button" data-part="night">Night</button>
+          </div>
+          <h2 class="sec" id="routineTitle"></h2>
+          <p class="meta" id="routineHint"></p>
+          <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+          <p class="count" id="count"></p>
+          <button class="btn primary big" id="startBtn"></button>
+        </section>
+
+        <section class="panel">
+          <div
+            class="tabs"
+            role="tablist"
+            aria-label="Your steps or other routines"
+          >
+            <button
+              type="button"
+              role="tab"
+              id="tab-mine"
+              aria-controls="p-mine"
+              aria-selected="true"
+            >
+              My steps
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="tab-browse"
+              aria-controls="p-browse"
+              aria-selected="false"
+            >
+              Browse routines
+            </button>
+          </div>
+          <div role="tabpanel" id="p-mine" aria-labelledby="tab-mine">
+            <div class="panel-head">
+              <h2 class="sec small" id="stepsTitle">Steps</h2>
+              <div class="head-actions">
+                <button class="btn" id="reorderBtn" aria-pressed="false">
+                  Reorder
+                </button>
+                <button class="btn" id="addBtn">Add step</button>
+              </div>
+            </div>
+            <div id="reorderTools" hidden>
+              <p class="meta">
+                Use the arrows to move steps. Tap Done when you’re finished.
+              </p>
+              <div class="tool-row">
+                <button type="button" class="btn small" id="sortBtn">
+                  Sort by type
+                </button>
+                <button type="button" class="btn small" id="orderBtn">
+                  Layering order…
+                </button>
+              </div>
+            </div>
+            <ol class="steps" id="steps"></ol>
+          </div>
+          <div
+            role="tabpanel"
+            id="p-browse"
+            aria-labelledby="tab-browse"
+            hidden
+          ></div>
+        </section>
+      </main>
+
+      <footer>
+        <span>Everything stays in this browser. Nothing is sent anywhere.</span>
+        <span id="adviceNote" hidden
+          >Routine suggestions are general tips, not medical advice. For ongoing
+          skin problems, see a dermatologist.</span
+        >
+      </footer>
+    </div>
+
+    <dialog id="stepDlg" aria-labelledby="stepDlgTitle">
+      <form class="dlg form" id="stepForm" novalidate>
+        <h2 id="stepDlgTitle">Add step</h2>
+        <label
+          >Step name<input
+            type="text"
+            name="name"
+            maxlength="60"
+            placeholder="e.g. Moisturizer"
+            autocomplete="off"
+        /></label>
+        <label
+          >Type of product
+          <select name="kind" id="kindSelect"></select>
+          <span class="hint"
+            >Sets the step’s colour. Lighter products usually go before heavier
+            ones.</span
+          >
+        </label>
+        <div class="two">
+          <label
+            >Routine
+            <select name="part">
+              <option value="morning">Morning</option>
+              <option value="night">Night</option>
+            </select>
+          </label>
+          <label
+            >Wait after (minutes)<input
+              type="number"
+              name="waitMinutes"
+              min="0"
+              max="60"
+              step="1"
+              inputmode="numeric"
+          /></label>
+        </div>
+        <label
+          >Note
+          <textarea
+            name="note"
+            rows="2"
+            maxlength="200"
+            placeholder="How much, how to apply, what to watch for"
+          ></textarea>
+        </label>
+        <p class="error" id="formError" role="alert" hidden></p>
+        <div class="move" id="deleteRow">
+          <button type="button" class="btn small danger" id="deleteBtn">
+            Delete step
+          </button>
+        </div>
+        <div class="dlg-actions">
+          <button type="button" class="btn" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn primary">Save step</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="runDlg" class="run" aria-labelledby="runTitle">
+      <div class="run-inner">
+        <div class="run-top">
+          <span id="runWhere"></span>
+          <button
+            type="button"
+            class="icon"
+            id="runClose"
+            aria-label="Close step-by-step mode"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+        <div class="run-body" id="runBody" aria-live="polite"></div>
+        <div class="run-actions" id="runActions"></div>
+      </div>
+    </dialog>
+
+    <dialog id="quizDlg" class="run quiz" aria-labelledby="quizTitle">
+      <div class="run-inner">
+        <div class="run-top">
+          <span id="quizWhere"></span>
+          <button
+            type="button"
+            class="icon"
+            id="quizClose"
+            aria-label="Close the skin quiz"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </div>
+        <div class="bar quiz-bar" aria-hidden="true"><i id="quizBar"></i></div>
+        <div class="run-body" id="quizBody"></div>
+        <div class="run-actions" id="quizActions"></div>
+      </div>
+    </dialog>
+
+    <dialog id="orderDlg" aria-labelledby="orderTitle">
+      <div class="dlg">
+        <h2 id="orderTitle">Layering order</h2>
+        <p class="meta">
+          Which types of product go on first. Daybox uses this to place steps
+          when you add a routine or a new step, and when you tap Sort by type.
+          Thinnest to thickest is the usual rule.
+        </p>
+        <ol class="kind-order" id="kindOrder"></ol>
+        <div class="dlg-actions">
+          <button type="button" class="btn" id="orderReset">
+            Reset to usual order
+          </button>
+          <button type="button" class="btn primary" id="orderClose">
+            Done
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" hidden></div>
+
+  </body>
+</html>
